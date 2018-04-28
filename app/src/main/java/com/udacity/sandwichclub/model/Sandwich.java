@@ -4,12 +4,34 @@ import java.util.List;
 
 public class Sandwich {
 
+    public static final String NO_INFORMATION = "No information found";
+
     private String mainName;
     private List<String> alsoKnownAs = null;
     private String placeOfOrigin;
     private String description;
     private String image;
     private List<String> ingredients = null;
+
+    private String stringFromList(List<String> list) {
+        if (0 == list.size()) return NO_INFORMATION;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < list.size(); i ++) {
+            sb.append("\u2022 ").append(list.get(i));
+            if (i + 1 <  list.size()) sb.append("\n");
+        }
+        return sb.toString();
+    }
+
+    private String unorderedList(List<String> list) {
+        if (0 == list.size()) return NO_INFORMATION;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < list.size(); i ++) {
+            sb.append(list.get(i));
+            sb.append((i + 1 < list.size()) ? ", " : "");
+        }
+        return sb.toString();
+    }
 
     /**
      * No args constructor for use in serialization
@@ -34,8 +56,8 @@ public class Sandwich {
         this.mainName = mainName;
     }
 
-    public List<String> getAlsoKnownAs() {
-        return alsoKnownAs;
+    public String getAlsoKnownAs() {
+        return unorderedList(alsoKnownAs);
     }
 
     public void setAlsoKnownAs(List<String> alsoKnownAs) {
@@ -43,6 +65,7 @@ public class Sandwich {
     }
 
     public String getPlaceOfOrigin() {
+        if ("".equals(placeOfOrigin)) return NO_INFORMATION;
         return placeOfOrigin;
     }
 
@@ -66,8 +89,8 @@ public class Sandwich {
         this.image = image;
     }
 
-    public List<String> getIngredients() {
-        return ingredients;
+    public String getIngredients() {
+        return stringFromList(ingredients);
     }
 
     public void setIngredients(List<String> ingredients) {
