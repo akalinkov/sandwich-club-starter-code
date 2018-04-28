@@ -15,6 +15,14 @@ public class JsonUtils {
 
     private static final String TAG = JsonUtils.class.getSimpleName();
 
+    private static final String NAME = "name";
+    private static final String MAIN_NAME = "mainName";
+    private static final String ALSO_KNOWN_AS = "alsoKnownAs";
+    private static final String PLACE_OF_ORIGIN = "placeOfOrigin";
+    private static final String DESCRIPTION = "description";
+    private static final String IMAGE = "image";
+    private static final String INGREDIENTS = "ingredients";
+
     private static List<String> parseArray (JSONArray array) {
         List<String> list = new ArrayList<>();
         try {
@@ -31,19 +39,18 @@ public class JsonUtils {
     public static Sandwich parseSandwichJson(String json) {
         try {
             JSONObject sandwich = new JSONObject(json);
-            JSONObject name = sandwich.getJSONObject("name");
-            String mainName = name.getString("mainName");
-            List<String> alsoKnownAs = parseArray(name.getJSONArray("alsoKnownAs"));
-            String placeOfOrigin = sandwich.getString("placeOfOrigin");
-            String description = sandwich.getString("description");
-            String image = sandwich.getString("image");
-            List<String> ingredients = parseArray(sandwich.getJSONArray("ingredients"));
+            JSONObject name = sandwich.getJSONObject(NAME);
+            String mainName = name.getString(MAIN_NAME);
+            List<String> alsoKnownAs = parseArray(name.getJSONArray(ALSO_KNOWN_AS));
+            String placeOfOrigin = sandwich.getString(PLACE_OF_ORIGIN);
+            String description = sandwich.getString(DESCRIPTION);
+            String image = sandwich.getString(IMAGE);
+            List<String> ingredients = parseArray(sandwich.getJSONArray(INGREDIENTS));
             return new Sandwich(mainName, alsoKnownAs, placeOfOrigin, description, image, ingredients);
         } catch (JSONException e) {
-            Log.e(TAG, "parseSandwichJson: Failed to parseing '" + json + "'", e);
+            Log.e(TAG, "parseSandwichJson: Failed to parse '" + json + "'", e);
             e.printStackTrace();
         }
-
         return null;
     }
 }
