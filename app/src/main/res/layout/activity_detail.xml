@@ -3,115 +3,142 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
-        <LinearLayout
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:contentScrim="?attr/colorPrimary"
+                app:expandedTitleMarginEnd="64dp"
+                app:expandedTitleMarginStart="48dp"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <ImageView
+                    android:id="@+id/image_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/sandwich_picture_content_description"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="centerCrop"
+                    app:layout_collapseMode="parallax" />
+
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    app:layout_collapseMode="pin"/>
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <ImageView
-            android:id="@+id/image_iv"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/sandwich_picture_content_description"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            tools:context="com.udacity.sandwichclub.DetailActivity">
-
-            <!--Place of Origin-->
-            <TextView
-                android:id="@+id/origin_label"
-                android:layout_marginTop="@dimen/text_view_top_margin"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_width="wrap_content"
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/detail_place_of_origin_label"
-                android:textStyle="bold"/>
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                tools:context="com.udacity.sandwichclub.DetailActivity">
 
-            <TextView
-                android:id="@+id/origin_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
-                app:layout_constraintTop_toTopOf="@id/origin_label"
-                app:layout_constraintLeft_toRightOf="@id/origin_label" />
+                <!--Place of Origin-->
+                <TextView
+                    android:id="@+id/origin_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/text_view_top_margin"
+                    android:text="@string/detail_place_of_origin_label"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <!--Also known as-->
-            <TextView
-                android:id="@+id/also_known_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_top_margin"
-                android:text="@string/detail_also_known_as_label"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/origin_tv"
-                app:layout_constraintLeft_toLeftOf="@id/origin_label" />
+                <TextView
+                    android:id="@+id/origin_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintLeft_toRightOf="@id/origin_label"
+                    app:layout_constraintTop_toTopOf="@id/origin_label" />
 
-            <TextView
-                android:id="@+id/also_known_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/also_known_label"
-                app:layout_constraintLeft_toLeftOf="@id/origin_tv"
-                app:layout_constraintRight_toRightOf="parent" />
+                <!--Also known as-->
+                <TextView
+                    android:id="@+id/also_known_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/text_view_top_margin"
+                    android:text="@string/detail_also_known_as_label"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="@id/origin_label"
+                    app:layout_constraintTop_toBottomOf="@id/origin_tv" />
 
-            <!--Ingredients-->
-            <TextView
-                android:id="@+id/ingredients_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_top_margin"
-                android:text="@string/detail_ingredients_label"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/also_known_tv"
-                app:layout_constraintLeft_toLeftOf="parent"/>
+                <TextView
+                    android:id="@+id/also_known_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="@id/origin_tv"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/also_known_label" />
 
-            <TextView
-                android:id="@+id/ingredients_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/ingredients_label"
-                app:layout_constraintLeft_toLeftOf="@id/also_known_tv"
-                app:layout_constraintRight_toRightOf="parent" />
+                <!--Ingredients-->
+                <TextView
+                    android:id="@+id/ingredients_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/text_view_top_margin"
+                    android:text="@string/detail_ingredients_label"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/also_known_tv" />
 
-            <!--Description-->
-            <TextView
-                android:id="@+id/description_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_top_margin"
-                android:text="@string/detail_description_label"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/ingredients_tv"
-                app:layout_constraintLeft_toLeftOf="parent"/>
+                <TextView
+                    android:id="@+id/ingredients_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="@id/also_known_tv"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/ingredients_label" />
 
-            <TextView
-                android:id="@+id/description_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="@+id/ingredients_tv"
-                app:layout_constraintTop_toTopOf="@id/description_label" />
-        </android.support.constraint.ConstraintLayout>
-        </LinearLayout>
-    </ScrollView>
+                <!--Description-->
+                <TextView
+                    android:id="@+id/description_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/text_view_top_margin"
+                    android:text="@string/detail_description_label"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ingredients_tv" />
 
+                <TextView
+                    android:id="@+id/description_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="@+id/ingredients_tv"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/description_label" />
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.design.widget.CoordinatorLayout>
 </layout>

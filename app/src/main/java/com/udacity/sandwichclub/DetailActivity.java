@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -23,8 +22,6 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
-        ImageView ingredientsIv = findViewById(R.id.image_iv);
 
         Intent intent = getIntent();
         if (intent == null) {
@@ -51,8 +48,6 @@ public class DetailActivity extends AppCompatActivity {
         Picasso.with(this)
                 .load(sandwich.getImage())
                 .into(mBinding.imageIv);
-
-        setTitle(sandwich.getMainName());
     }
 
     private void closeOnError() {
@@ -66,5 +61,6 @@ public class DetailActivity extends AppCompatActivity {
         mBinding.descriptionTv.setText(sandwich.getDescription());
         mBinding.ingredientsTv.setText(sandwich.getIngredients());
         mBinding.originTv.setText(sandwich.getPlaceOfOrigin());
+        mBinding.collapsingToolbar.setTitle(sandwich.getMainName());
     }
 }
